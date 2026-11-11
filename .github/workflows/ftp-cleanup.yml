@@ -1,0 +1,37 @@
+name: FTP cleanup (one-off)
+
+# Removes the copy of the site that an early deploy put in the wrong folder.
+# Temporary: delete this workflow and cleanup_stray.py once it has run.
+
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: Stray folder on the server, as the FTP account sees it
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    concurrency:
+      group: ftp-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+      - name: Remove the stray copy
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+          FTP_PROTOCOL: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          FTP_PORT: ${{ vars.FTP_PORT || '21' }}
+          FTP_VERIFY_CERT: ${{ vars.FTP_VERIFY_CERT || 'true' }}
+          FOLDER: ${{ inputs.folder }}
+        run: python3 .github/scripts/cleanup_stray.py "$FOLDER"
