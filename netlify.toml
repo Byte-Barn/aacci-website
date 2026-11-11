@@ -1,0 +1,9 @@
+# Netlify: build the static export and publish /out.
+# Redirects from old asianafrican.org addresses are in public/_redirects; headers in public/_headers.
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NEXT_TELEMETRY_DISABLED = "1"
