@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { SERVICES, ETHIOPIA, TESTIMONIALS } from '@/content/data';
 import { useMotion } from './hooks';
+import { asset } from '@/lib/base';
 
 const motionOn = () => typeof document !== 'undefined' && document.documentElement.classList.contains('motion');
 
@@ -46,7 +47,7 @@ export function ServicesTabs() {
         <div className="service-media fx" data-tilt="">
           {SERVICES.map((s, i) => (
             (i === cur || i === prev) ? (
-              <img key={s.id} className={`service-img${i === cur && prev !== null && motionOn() ? ' is-entering' : ''}`} src={s.img} alt={i === cur ? s.alt : ''}
+              <img key={s.id} className={`service-img${i === cur && prev !== null && motionOn() ? ' is-entering' : ''}`} src={asset(s.img)} alt={i === cur ? s.alt : ''}
                 width={1500} height={600} style={{ zIndex: i === cur ? 2 : 1 }} />
             ) : null
           ))}
@@ -121,7 +122,7 @@ export function Reel() {
         {ETHIOPIA.map((m) => (
           <li className="reel-card" key={m.img}>
             <figure>
-              <div className="reel-media fx" data-tilt=""><img src={m.img} alt={m.alt} width={1500} height={392} loading="lazy" decoding="async" /></div>
+              <div className="reel-media fx" data-tilt=""><img src={asset(m.img)} alt={m.alt} width={1500} height={392} loading="lazy" decoding="async" /></div>
               <figcaption><span className="reel-org">{m.org}</span><span className="reel-who">{m.who}</span></figcaption>
             </figure>
           </li>
@@ -168,7 +169,7 @@ export function Testimonials() {
       {TESTIMONIALS.map((t, n) => (
         <figure key={t.name} className={`voice${n === i ? ' is-current' : ''}`} aria-roledescription="slide" aria-label={`${n + 1} of ${TESTIMONIALS.length}`} aria-hidden={n !== i}>
           <blockquote><p>{t.quote}</p></blockquote>
-          <figcaption><img src={t.img} alt="" width={150} height={150} loading="lazy" /><span><b>{t.name}</b>{t.role}</span></figcaption>
+          <figcaption><img src={asset(t.img)} alt="" width={150} height={150} loading="lazy" /><span><b>{t.name}</b>{t.role}</span></figcaption>
         </figure>
       ))}
       <div className="voices-nav">

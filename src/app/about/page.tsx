@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Cta, PageHero, Partners, Prose, SectionHead, Words } from '@/components/ui';
 import { site } from '@/lib/content';
 import { pageMeta } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const metadata: Metadata = pageMeta({
   title: 'About AACCI',
@@ -82,7 +83,7 @@ export default function About() {
       <section className="logo-story section section--ink" id="logo" aria-labelledby="logo-title">
         <div className="wrap logo-grid">
           <div className="logo-stage" data-logo-stage="">
-            <img src="/img/aacci-logo-light.png" alt="The AACCI logo: an outline of Africa with three stripes in red, green and orange, beside a solid letter A" width={512} height={512} loading="lazy" />
+            <img src={asset('/img/aacci-logo-light.png')} alt="The AACCI logo: an outline of Africa with three stripes in red, green and orange, beside a solid letter A" width={512} height={512} loading="lazy" />
             <span className="logo-halo" aria-hidden="true" />
           </div>
           <div>
@@ -117,7 +118,7 @@ export default function About() {
       <section className="founder section section--mist" id="founder" aria-labelledby="founder-title">
         <div className="wrap founder-grid">
           <figure className="founder-photo" data-reveal="portrait">
-            <div className="person-photo"><div className="fx" data-tilt=""><img src="/img/people/gd-singh.webp" alt="Dr. G.D. Singh" width={900} height={900} loading="lazy" /></div></div>
+            <div className="person-photo"><div className="fx" data-tilt=""><img src={asset('/img/people/gd-singh.webp')} alt="Dr. G.D. Singh" width={900} height={900} loading="lazy" /></div></div>
             <figcaption><b>Dr. G.D. Singh</b>Founder and Chairman</figcaption>
           </figure>
           <div>
@@ -133,7 +134,7 @@ export default function About() {
 
       <section className="section" id="award" aria-labelledby="award-title">
         <div className="wrap award-band">
-          <div className="fx" data-tilt="" data-reveal=""><img src="/img/glory-book.webp" alt="India Glory Book of Records certificate awarded to AACCI" width={712} height={983} loading="lazy" /></div>
+          <div className="fx" data-tilt="" data-reveal=""><img src={asset('/img/glory-book.webp')} alt="India Glory Book of Records certificate awarded to AACCI" width={712} height={983} loading="lazy" /></div>
           <div>
             <Words className="h2" id="award-title" text="Fastest growing chamber of commerce in India" />
             <p className="lead" data-reveal="">AACCI is officially recognised by the India Glory Book of Records with the title &ldquo;The Fastest Growing Chamber of Commerce in India&rdquo;.</p>

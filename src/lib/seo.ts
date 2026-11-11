@@ -2,18 +2,20 @@ import type { Metadata } from 'next';
 import { SITE, OFFICES, SECRETARIAT, TIMELINE } from '@/content/data';
 import type { NewsPost } from '@/lib/content';
 
-const abs = (path: string) => new URL(path, SITE.url).toString();
+/** Full public address of a root-based path. SITE.url already includes any sub-path the site is served under. */
+export const abs = (path: string) => `${SITE.url}${path}`;
 
 /** Page metadata with canonical URL, Open Graph and Twitter cards. */
 export function pageMeta(opts: { title: string; description: string; path: string; image?: string; type?: 'website' | 'article' }): Metadata {
-  const image = opts.image ?? '/img/og.jpg';
+  const image = abs(opts.image ?? '/img/og.jpg');
+  const url = abs(opts.path);
   return {
     title: opts.title,
     description: opts.description,
-    alternates: { canonical: opts.path },
+    alternates: { canonical: url },
     openGraph: {
       type: opts.type ?? 'website',
-      url: opts.path,
+      url,
       title: opts.title,
       description: opts.description,
       siteName: SITE.name,

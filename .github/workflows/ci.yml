@@ -1,19 +1,10 @@
 name: CI
 
 # Every pull request and every push to main is linted, type-checked and built.
-# Pushes to main (and manual runs) are then uploaded to the web host over FTP.
+# Pushes to main (and manual runs) are then published to GitHub Pages.
 #
-# Repository secrets used by the deploy job:
-#   FTP_HOST      server name, e.g. ftp.example.org
-#   FTP_USERNAME  FTP account
-#   FTP_PASSWORD  its password
-#   FTP_PATH      folder on the server that the site is served from, e.g. /public_html/
-#
-# Optional repository variables:
-#   FTP_PROTOCOL     ftps (default) or ftp
-#   FTP_PORT         defaults to 21
-#   SITE_OFFLINE     true takes the site down (503 for every address) on the next deploy
-#   FTP_VERIFY_CERT  the server's TLS certificate is checked unless this is false
+# The site's address and sub-path come from the repository's Pages settings, so
+# adding a custom domain there needs no change here.
 
 on:
   push:
@@ -23,6 +14,8 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
 
 env:
   NEXT_TELEMETRY_DISABLED: '1'
@@ -40,59 +33,44 @@ jobs:
           node-version: 22
           cache: npm
 
+      # Gives the address the site is served at: base_url is the full address
+      # without a trailing slash, base_path the sub-path ("/aacci-website", or
+      # empty with a custom domain).
+      - name: Read the Pages address
+        id: pages
+        uses: actions/configure-pages@v5
+
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm run build
-
-      # The host ignores Netlify's _redirects and _headers; write the same
-      # rules, the 404 page and the deploy-list block as an .htaccess.
-      - name: Write .htaccess
         env:
-          SITE_OFFLINE: ${{ vars.SITE_OFFLINE }}
-        run: python3 .github/scripts/build_htaccess.py out
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+
+      # Netlify-only files; GitHub Pages ignores them.
+      - run: rm -f out/_redirects out/_headers
 
       - name: Keep the built site for the deploy job
         if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: site
           path: out/
-          include-hidden-files: true
-          if-no-files-found: error
-          retention-days: 7
 
   deploy:
-    name: Deploy over FTP
+    name: Deploy to GitHub Pages
     needs: build
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    # The first upload sends every file (about 120 MB) and is slow.
-    # Later runs only send what changed.
-    timeout-minutes: 90
-    # One deploy at a time; a newer push waits for the running upload to finish.
+    timeout-minutes: 15
+    # One deploy at a time; a newer push waits for the running one to finish.
     concurrency:
-      group: ftp-deploy
+      group: pages
       cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          sparse-checkout: .github/scripts
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: site
-          path: out
-
-      # Uploads new and changed files, removes deleted ones, retries on
-      # network errors. See the script for details.
-      - name: Upload to the web host
-        env:
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          FTP_PATH: ${{ secrets.FTP_PATH }}
-          FTP_PROTOCOL: ${{ vars.FTP_PROTOCOL || 'ftps' }}
-          FTP_PORT: ${{ vars.FTP_PORT || '21' }}
-          FTP_VERIFY_CERT: ${{ vars.FTP_VERIFY_CERT || 'true' }}
-        run: python3 .github/scripts/deploy_ftp.py out
+      - name: Publish
+        id: deployment
+        uses: actions/deploy-pages@v4

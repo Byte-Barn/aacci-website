@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, type ReactNode } from 'react';
+import { asset } from '@/lib/base';
 
 const SENT: Record<string, string> = {
   membership: 'Application sent. The membership team will contact you by email about the next steps and payment.',
@@ -61,7 +62,7 @@ async function send(form: HTMLFormElement) {
   }
   const multipart = form.enctype === 'multipart/form-data';
   const body = multipart ? data : new URLSearchParams(data as unknown as Record<string, string>).toString();
-  const r = await fetch('/', { method: 'POST', body, ...(multipart ? {} : { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }) });
+  const r = await fetch(asset('/'), { method: 'POST', body, ...(multipart ? {} : { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }) });
   return { ok: r.ok };
 }
 
@@ -103,7 +104,7 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
   };
 
   return (
-    <form ref={ref} className={className} name={name} method="POST" action="/thanks/" encType={multipart ? 'multipart/form-data' : undefined}
+    <form ref={ref} className={className} name={name} method="POST" action={asset('/thanks/')} encType={multipart ? 'multipart/form-data' : undefined}
       data-netlify="true" netlify-honeypot="bot-field" noValidate onSubmit={onSubmit} onChange={onFieldChange} onBlur={onFieldChange}>
       <input type="hidden" name="form-name" value={name} />
       <p className="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabIndex={-1} autoComplete="off" /></label></p>
@@ -134,7 +135,7 @@ export function PickLink({ href, select, value, className = 'btn btn--primary', 
   href: string; select: string; value: string; className?: string; children: ReactNode;
 }) {
   return (
-    <a className={className} href={href} onClick={() => {
+    <a className={className} href={asset(href)} onClick={() => {
       const el = document.querySelector<HTMLSelectElement>(select);
       if (!el) return;
       const opt = Array.from(el.options).find((o) => o.text.trim().toLowerCase() === value.toLowerCase());

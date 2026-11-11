@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Cta, PageHero } from '@/components/ui';
 import { SERVICES } from '@/content/data';
 import { pageMeta } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const metadata: Metadata = pageMeta({
   title: 'Services: trade facilitation, representation and missions',
@@ -25,7 +26,7 @@ export default function Services() {
         <div className="wrap">
           {main.map((s, i) => (
             <article className={`feature${i % 2 ? ' feature--flip' : ''}`} id={s.id} key={s.id}>
-              <div className="feature-media fx" data-tilt="" data-reveal="wipe"><img src={s.img} alt={s.alt} width={1500} height={600} loading="lazy" /></div>
+              <div className="feature-media fx" data-tilt="" data-reveal="wipe"><img src={asset(s.img)} alt={s.alt} width={1500} height={600} loading="lazy" /></div>
               <div className="feature-copy">
                 <h2 className="h3" data-reveal="">{s.name}</h2>
                 <p data-reveal="">{s.long}</p>

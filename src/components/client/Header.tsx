@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { NAV, SITE } from '@/content/data';
+import { asset } from '@/lib/base';
 
 export const openSearch = () => window.dispatchEvent(new CustomEvent('aacci:search'));
 
@@ -95,7 +96,7 @@ export default function Header() {
       <header className={`site-header${scrolled ? ' is-scrolled' : ''}${hidden && !open && !mobile ? ' is-hidden' : ''}`}>
         <div className="wrap header-row">
           <Link className="brand" href="/" aria-label="AACCI home">
-            <img src="/img/aacci-logo-light.png" alt="" width={48} height={48} />
+            <img src={asset('/img/aacci-logo-light.png')} alt="" width={48} height={48} />
             <span className="brand-name">Asian-African Chamber<br />of Commerce &amp; Industry</span>
           </Link>
           <nav className="nav" aria-label="Main" ref={navRef}>
@@ -145,7 +146,7 @@ export default function Header() {
         ref={drawerRef} inert={!mobile}>
         <div className="drawer-head">
           <Link className="drawer-brand" href="/" onClick={closeDrawer}>
-            <img src="/img/aacci-logo-light.png" alt="" width={40} height={40} />
+            <img src={asset('/img/aacci-logo-light.png')} alt="" width={40} height={40} />
             <span>Asian-African Chamber<br />of Commerce &amp; Industry</span>
           </Link>
           <button className="drawer-close" type="button" aria-label="Close menu" onClick={closeDrawer}>
