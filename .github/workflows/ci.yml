@@ -1,0 +1,84 @@
+name: CI
+
+# Every pull request and every push to main is linted, type-checked and built.
+# Pushes to main (and manual runs) are then uploaded to the web host over FTP.
+#
+# Repository secrets used by the deploy job:
+#   FTP_HOST      server name, e.g. ftp.example.org
+#   FTP_USERNAME  FTP account
+#   FTP_PASSWORD  its password
+#   FTP_PATH      folder on the server that the site is served from, e.g. /public_html/
+#
+# Optional repository variables:
+#   FTP_PROTOCOL  ftps (default), ftps-legacy or ftp
+#   FTP_PORT      defaults to 21
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: '1'
+
+jobs:
+  build:
+    name: Lint, typecheck and build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run build
+
+      - name: Keep the built site for the deploy job
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: out/
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
+  deploy:
+    name: Deploy over FTP
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    # The first upload sends every file (about 50 MB of images) and is slow.
+    # Later runs only send what changed.
+    timeout-minutes: 90
+    # One deploy at a time; a newer push waits for the running upload to finish.
+    concurrency:
+      group: ftp-deploy
+      cancel-in-progress: false
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: out
+
+      - name: Upload to the web host
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          port: ${{ vars.FTP_PORT || 21 }}
+          local-dir: ./out/
+          # The action requires a trailing slash; add one if the secret has none.
+          server-dir: ${{ endsWith(secrets.FTP_PATH, '/') && secrets.FTP_PATH || format('{0}/', secrets.FTP_PATH) }}
