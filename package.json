@@ -1,0 +1,31 @@
+{
+  "name": "aacci-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "npx serve out",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "content": "python scripts/export_content.py",
+    "map": "python scripts/build_map.py"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "typescript": "^5"
+  },
+  "description": "Website of the Asian-African Chamber of Commerce & Industry (AACCI): a Next.js static export.",
+  "engines": {
+    "node": ">=20.9"
+  }
+}
