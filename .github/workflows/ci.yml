@@ -10,8 +10,9 @@ name: CI
 #   FTP_PATH      folder on the server that the site is served from, e.g. /public_html/
 #
 # Optional repository variables:
-#   FTP_PROTOCOL  ftps (default), ftps-legacy or ftp
-#   FTP_PORT      defaults to 21
+#   FTP_PROTOCOL     ftps (default) or ftp
+#   FTP_PORT         defaults to 21
+#   FTP_VERIFY_CERT  the server's TLS certificate is checked unless this is false
 
 on:
   push:
@@ -58,7 +59,7 @@ jobs:
     needs: build
     if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    # The first upload sends every file (about 50 MB of images) and is slow.
+    # The first upload sends every file (about 120 MB) and is slow.
     # Later runs only send what changed.
     timeout-minutes: 90
     # One deploy at a time; a newer push waits for the running upload to finish.
@@ -66,46 +67,27 @@ jobs:
       group: ftp-deploy
       cancel-in-progress: false
     steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: .github/scripts
+
       - uses: actions/download-artifact@v4
         with:
           name: site
           path: out
 
-      # FTP_HOST must end up as a bare server name. Tolerate common paste
-      # mistakes (ftp:// prefix, user@, :port, a trailing path, whitespace)
-      # and say which one was found, without printing the value.
-      - name: Check the FTP host
-        id: ftp
-        env:
-          RAW: ${{ secrets.FTP_HOST }}
-        run: |
-          host="$(printf '%s' "$RAW" | tr -d '[:space:]')"
-          if [ -z "$host" ]; then echo "::error::The FTP_HOST secret is empty."; exit 1; fi
-          if [ "$host" != "$RAW" ]; then echo "::warning::FTP_HOST contains whitespace; ignoring it."; fi
-          case "$host" in *://*) echo "::warning::FTP_HOST starts with a scheme such as ftp://; ignoring it."; host="${host#*://}";; esac
-          case "$host" in */*) echo "::warning::FTP_HOST contains a path; ignoring it. Folders belong in FTP_PATH."; host="${host%%/*}";; esac
-          case "$host" in *@*) echo "::warning::FTP_HOST contains user@; ignoring it."; host="${host##*@}";; esac
-          port=""
-          case "$host" in *:*) echo "::warning::FTP_HOST contains a port; using it."; port="${host##*:}"; host="${host%%:*}";; esac
-          echo "::add-mask::$host"
-          if ! getent hosts "$host" > /dev/null; then
-            case "$host" in
-              *.*) echo "::error::FTP_HOST looks like a server name but does not exist in DNS. Check it for a typo, or use the server's IP address.";;
-              *) echo "::error::FTP_HOST has no dot in it, so it is not a server name. It should look like ftp.example.org.";;
-            esac
-            exit 1
-          fi
-          echo "host=$host" >> "$GITHUB_OUTPUT"
-          echo "port=$port" >> "$GITHUB_OUTPUT"
+      - name: Install lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
 
+      # Uploads new and changed files, removes deleted ones, retries on
+      # network errors. See the script for details.
       - name: Upload to the web host
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ steps.ftp.outputs.host }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
-          port: ${{ steps.ftp.outputs.port || vars.FTP_PORT || 21 }}
-          local-dir: ./out/
-          # The action requires a trailing slash; add one if the secret has none.
-          server-dir: ${{ endsWith(secrets.FTP_PATH, '/') && secrets.FTP_PATH || format('{0}/', secrets.FTP_PATH) }}
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_PATH: ${{ secrets.FTP_PATH }}
+          FTP_PROTOCOL: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          FTP_PORT: ${{ vars.FTP_PORT || '21' }}
+          FTP_VERIFY_CERT: ${{ vars.FTP_VERIFY_CERT || 'true' }}
+        run: bash .github/scripts/deploy-ftp.sh out
