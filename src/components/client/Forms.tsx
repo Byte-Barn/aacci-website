@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, type ReactNode } from 'react';
+import { SITE } from '@/content/data';
 import { asset } from '@/lib/base';
 
 const SENT: Record<string, string> = {
@@ -13,6 +14,10 @@ const WHAT: Record<string, string> = { membership: 'membership application', con
 
 // FORMS_PROVIDER: "netlify" (default) or "formspree:<form id>". Set NEXT_PUBLIC_FORMS_PROVIDER at build time.
 const PROVIDER = process.env.NEXT_PUBLIC_FORMS_PROVIDER || 'netlify';
+// With Formspree, every form posts to one endpoint; a subject line tells the four forms apart in the inbox.
+const FORMSPREE = PROVIDER.startsWith('formspree:') ? `https://formspree.io/f/${PROVIDER.split(':')[1]}` : '';
+// Hidden field that only bots fill in. Each provider looks for its own field name.
+const HONEYPOT = FORMSPREE ? '_gotcha' : 'bot-field';
 
 function labelOf(input: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
   const lab = input.closest('.field') ?? input.labels?.[0];
@@ -56,8 +61,8 @@ async function send(form: HTMLFormElement) {
   const local = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
   if (local) return { ok: true, preview: true };
   const data = new FormData(form);
-  if (PROVIDER.startsWith('formspree:')) {
-    const r = await fetch(`https://formspree.io/f/${PROVIDER.split(':')[1]}`, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+  if (FORMSPREE) {
+    const r = await fetch(FORMSPREE, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     return { ok: r.ok };
   }
   const multipart = form.enctype === 'multipart/form-data';
@@ -66,7 +71,7 @@ async function send(form: HTMLFormElement) {
   return { ok: r.ok };
 }
 
-/** A form that validates in the browser and posts to Netlify Forms (or Formspree). Works without JS too: it posts to /thanks/. */
+/** A form that validates in the browser and posts to Netlify Forms (or Formspree). Works without JS too: it then lands on /thanks/. */
 export function SmartForm({ name, className = 'form', multipart = false, submitLabel, children, msgClass = 'form-msg' }: {
   name: string; className?: string; multipart?: boolean; submitLabel: string; children: ReactNode; msgClass?: string;
 }) {
@@ -79,7 +84,7 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
     const form = e.currentTarget;
     let first: HTMLElement | null = null;
     form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((input) => {
-      if (input.type === 'hidden' || input.name === 'bot-field') return;
+      if (input.type === 'hidden' || input.name === HONEYPOT) return;
       const p = problemWith(input);
       showError(input, p);
       if (p && !first) first = input;
@@ -104,10 +109,17 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
   };
 
   return (
-    <form ref={ref} className={className} name={name} method="POST" action={asset('/thanks/')} encType={multipart ? 'multipart/form-data' : undefined}
-      data-netlify="true" netlify-honeypot="bot-field" noValidate onSubmit={onSubmit} onChange={onFieldChange} onBlur={onFieldChange}>
+    <form ref={ref} className={className} name={name} method="POST" action={FORMSPREE || asset('/thanks/')} encType={multipart ? 'multipart/form-data' : undefined}
+      {...(FORMSPREE ? {} : { 'data-netlify': 'true', 'netlify-honeypot': HONEYPOT })} noValidate onSubmit={onSubmit} onChange={onFieldChange} onBlur={onFieldChange}>
       <input type="hidden" name="form-name" value={name} />
-      <p className="hp" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabIndex={-1} autoComplete="off" /></label></p>
+      {FORMSPREE ? (
+        <>
+          <input type="hidden" name="_subject" value={`AACCI website: ${WHAT[name] ?? name}`} />
+          {/* Where Formspree sends the visitor after a submission made without JavaScript. */}
+          <input type="hidden" name="_next" value={`${SITE.url}/thanks/`} />
+        </>
+      ) : null}
+      <p className="hp" aria-hidden="true"><label>Leave this empty <input name={HONEYPOT} tabIndex={-1} autoComplete="off" /></label></p>
       {children}
       {name !== 'newsletter' ? (
         <button className="btn btn--primary" type="submit" disabled={busy}><span>{busy ? 'Sending…' : submitLabel}</span></button>
