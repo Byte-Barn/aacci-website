@@ -588,6 +588,18 @@ a[data-external] .story-title::after { content: ' ↗'; font-weight: 400; color:
   .lightbox-next { right: calc(50% - 64px); }
   .gallery { grid-auto-rows: 120px; }
   .footer-links { grid-template-columns: 1fr 1fr; }
+  /* The tilted stripes rise about 60px at the right edge of a phone: keep the copy and buttons clear of them. */
+  .page-hero:not(.page-hero--map) { padding-bottom: 80px; }
+  /* Bigger tap areas for footer links. */
+  .footer-links { gap: 0 16px; }
+  .footer-links a, .social a, .footer-base a { display: inline-block; padding-block: 8px; }
+  .social { gap: 0 20px; margin-top: 8px; }
+  .footer-base ul { gap: 0 24px; }
+}
+@media (max-width: 480px) {
+  /* Stack label over value so long email addresses stay on one line. */
+  .contact-lines { gap: 12px; }
+  .contact-lines li { grid-template-columns: minmax(0, 1fr); gap: 0; }
 }
 
 /* Headings and the copy that follows them */
@@ -605,6 +617,24 @@ a[data-external] .story-title::after { content: ' ↗'; font-weight: 400; color:
 }
 .marquee:not(.is-animated) .marquee-row { display: contents; }
 .marquee:not(.is-animated) .marquee-row li { width: auto; height: auto; aspect-ratio: 1; }
+@media (max-width: 700px) {
+  /* On phones a 45-logo grid runs to thousands of pixels: show the two rows as sideways scrollers instead. */
+  .marquee:not(.is-animated) { display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; padding-inline: 0; }
+  .marquee:not(.is-animated) .marquee-row {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: auto;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--gutter);
+    padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .marquee:not(.is-animated) .marquee-row::-webkit-scrollbar { display: none; }
+  .marquee:not(.is-animated) .marquee-row li { flex: 0 0 104px; width: 104px; height: 104px; aspect-ratio: auto; scroll-snap-align: start; }
+}
 
 /* ---------- Event albums ---------- */
 .album-strip {
