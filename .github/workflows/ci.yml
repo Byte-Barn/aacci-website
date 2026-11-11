@@ -12,6 +12,7 @@ name: CI
 # Optional repository variables:
 #   FTP_PROTOCOL     ftps (default) or ftp
 #   FTP_PORT         defaults to 21
+#   SITE_OFFLINE     true takes the site down (503 for every address) on the next deploy
 #   FTP_VERIFY_CERT  the server's TLS certificate is checked unless this is false
 
 on:
@@ -47,6 +48,8 @@ jobs:
       # The host ignores Netlify's _redirects and _headers; write the same
       # rules, the 404 page and the deploy-list block as an .htaccess.
       - name: Write .htaccess
+        env:
+          SITE_OFFLINE: ${{ vars.SITE_OFFLINE }}
         run: python3 .github/scripts/build_htaccess.py out
 
       - name: Keep the built site for the deploy job
