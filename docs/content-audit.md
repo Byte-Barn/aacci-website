@@ -12,6 +12,7 @@ This is a review of the current WordPress site, made while migrating its content
 - **Junk posts:** untitled draft posts and duplicate posts are published. The new site leaves them out and redirects the duplicates.
 - **Burned-in captions:** captions are baked into the home page photos, with typos ("Haseen", "Minster"). The new site crops the captions off and sets them as real text.
 - **Missing alt text:** many images have empty alt text.
+- **Deleted news images:** the featured images of 26 news posts from April–August 2024 still appear in the media library, but every size of the file returns 404. The Internet Archive has no copy either, so these posts show broken images on the current site.
 
 ### Content
 
@@ -46,4 +47,4 @@ These are made in `scripts/export_content.py`.
 6. **Chapters:** confirm the South Korea and Mauritius chapter details.
 7. **Photos:** can we get full-resolution event photos, portraits for the governing council and advisory board, and the Ethiopia photos without captions?
 8. **Upcoming events:** what is planned for 2026–27?
-9. **News images:** 418 older news posts are still missing their featured image. The originals sit on asianafrican.org and can be added to `content/raw/news-images/`.
+9. **News images:** 418 of the 447 news posts now have their featured image. The other 29 show the chamber's branded placeholder: 26 whose image files were deleted from the old server (post IDs 6357, 6456, 6459, 6462, 6465, 6470, 6473, 6476, 6479, 6485, 6489, 6492, 6495, 6498, 6501, 6510, 6514, 6517, 6520, 6523, 6526, 6529, 6532, 6535, 6920 and 6925), and 3 that never had one (8501, 8064 and 7947). Can the chamber send these images? They go in `content/raw/news-images/news__<post id>.<ext>`.
