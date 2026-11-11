@@ -4,6 +4,7 @@ import { SmartForm } from '@/components/client/Forms';
 import { Btn, PageHero, Stripes, Words } from '@/components/ui';
 import { OFFICES, SITE } from '@/content/data';
 import { pageMeta } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const metadata: Metadata = pageMeta({
   title: 'Contact the chamber',
@@ -24,13 +25,13 @@ export default function Contact() {
           <ul className="offices">
             {OFFICES.map((o, i) => (
               <li className={`office${i === 0 ? ' office--main' : ''}`} data-reveal="" key={o.id} itemScope itemType="https://schema.org/Place">
-                {'photo' in o && o.photo ? <img className="office-photo" src={o.photo} alt="The grand opening of the Global Secretariat office in Ahmedabad, December 2022" width={640} height={256} loading="lazy" /> : null}
+                {'photo' in o && o.photo ? <img className="office-photo" src={asset(o.photo)} alt="The grand opening of the Global Secretariat office in Ahmedabad, December 2022" width={640} height={256} loading="lazy" /> : null}
                 <p className="office-tag">{o.tag}</p>
                 <h3 className="h3" itemProp="name">{o.city}</h3>
                 <address itemProp="address">{o.lines.join(', ')}</address>
                 {o.contacts.length ? (
                   <ul className="contact-lines">
-                    {o.contacts.map((c) => <li key={c.label}><span>{c.label}</span><a href={c.href} rel={c.href.startsWith('http') ? 'noopener' : undefined}>{c.value}</a></li>)}
+                    {o.contacts.map((c) => <li key={c.label}><span>{c.label}</span><a href={asset(c.href)} rel={c.href.startsWith('http') ? 'noopener' : undefined}>{c.value}</a></li>)}
                   </ul>
                 ) : null}
                 <a className="text-link" href={o.map} rel="noopener">Get directions</a>

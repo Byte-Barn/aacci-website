@@ -4,6 +4,7 @@ import { Btn, JsonLd, PageHero, SectionHead } from '@/components/ui';
 import { OUTREACH, SECRETARIAT } from '@/content/data';
 import { site } from '@/lib/content';
 import { pageMeta, personListLd } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const metadata: Metadata = pageMeta({
   title: 'Leadership, governing council and advisory board',
@@ -27,7 +28,7 @@ export default function Leadership() {
           <ul className="people">
             {SECRETARIAT.map((p) => (
               <li className="person" data-reveal="portrait" key={p.name}>
-                <div className="person-photo"><div className="fx" data-tilt=""><img src={p.img} alt={p.name} width={p.w} height={p.h} loading="lazy" /></div></div>
+                <div className="person-photo"><div className="fx" data-tilt=""><img src={asset(p.img)} alt={p.name} width={p.w} height={p.h} loading="lazy" /></div></div>
                 <p className="person-name">{p.name}</p><p className="person-role">{p.role}</p>
               </li>
             ))}

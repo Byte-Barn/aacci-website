@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Album } from '@/lib/content';
+import { asset } from '@/lib/base';
 
 const motionOn = () => typeof document !== 'undefined' && document.documentElement.classList.contains('motion');
 
@@ -53,7 +54,7 @@ export default function Gallery({ albums }: { albums: Album[] }) {
     if (view === null) return;
     strip.current?.querySelector('[aria-current="true"]')?.scrollIntoView({ block: 'nearest', inline: 'center' });
     const next = new Image();
-    next.src = photos[(view + 1) % photos.length].full;
+    next.src = asset(photos[(view + 1) % photos.length].full);
   }, [view, photos]);
 
   // Swipe on touch screens.
@@ -70,7 +71,7 @@ export default function Gallery({ albums }: { albums: Album[] }) {
               if (d) { e.preventDefault(); pickAlbum((i + d + albums.length) % albums.length, true); }
             }}>
             <span className="deck-stack" aria-hidden="true">
-              {al.photos.slice(0, 3).map((p) => <img key={p.thumb} src={p.thumb} alt="" width={640} height={427} loading="lazy" decoding="async" />)}
+              {al.photos.slice(0, 3).map((p) => <img key={p.thumb} src={asset(p.thumb)} alt="" width={640} height={427} loading="lazy" decoding="async" />)}
             </span>
             <span className="deck-title">{al.title}</span>
             <span className="deck-meta">{al.meta}, {al.photos.length} photo{al.photos.length > 1 ? 's' : ''}</span>
@@ -87,7 +88,7 @@ export default function Gallery({ albums }: { albums: Album[] }) {
           {photos.map((p, i) => (
             <li className="tile" key={p.full} style={{ '--i': i } as React.CSSProperties}>
               <button type="button" className="fx" data-tilt="" onClick={(e) => open(i, e.currentTarget)} aria-label={`Open photo ${i + 1} of ${photos.length}: ${album.title}`}>
-                <img src={p.thumb} alt={`${album.title}, photo ${i + 1}`} width={p.w} height={p.h} loading="lazy" decoding="async" />
+                <img src={asset(p.thumb)} alt={`${album.title}, photo ${i + 1}`} width={p.w} height={p.h} loading="lazy" decoding="async" />
                 <span className="tile-cap" aria-hidden="true"><span>{album.title}</span><span>{String(i + 1).padStart(2, '0')}</span></span>
               </button>
             </li>
@@ -109,14 +110,14 @@ export default function Gallery({ albums }: { albums: Album[] }) {
             onTouchStart={(e) => { touch.current = e.touches[0].clientX; }}
             onTouchEnd={(e) => { if (touch.current === null) return; const dx = e.changedTouches[0].clientX - touch.current; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); touch.current = null; }}>
             <button type="button" className="viewer-btn viewer-nav viewer-prev" onClick={() => step(-1)} aria-label="Previous photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg></button>
-            <img key={photos[view].full} className="is-in" src={photos[view].full} alt={`${album.title}, photo ${view + 1}`} width={photos[view].w} height={photos[view].h} />
+            <img key={photos[view].full} className="is-in" src={asset(photos[view].full)} alt={`${album.title}, photo ${view + 1}`} width={photos[view].w} height={photos[view].h} />
             <button type="button" className="viewer-btn viewer-nav viewer-next" onClick={() => step(1)} aria-label="Next photo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg></button>
             <span className="viewer-progress" key={`p-${view}-${playing}`} aria-hidden="true" />
           </div>
           <div className="viewer-strip" ref={strip}>
             {photos.map((p, i) => (
               <button key={p.thumb} type="button" aria-label={`Photo ${i + 1}`} aria-current={i === view} onClick={() => setView(i)}>
-                <img src={p.thumb} alt="" width={84} height={60} loading="lazy" />
+                <img src={asset(p.thumb)} alt="" width={84} height={60} loading="lazy" />
               </button>
             ))}
           </div>

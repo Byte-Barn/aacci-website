@@ -1,6 +1,6 @@
 # AACCI website
 
-The website of the **Asian-African Chamber of Commerce & Industry (AACCI)**, built with Next.js as a fully static site. It replaces the WordPress site at asianafrican.org and is intended for **asianafricanmission.org**.
+The website of the **Asian-African Chamber of Commerce & Industry (AACCI)**, built with Next.js as a fully static site. It replaces the WordPress site at asianafrican.org and is intended for **asianafricanmission.org**. It is currently published at https://byte-barn.github.io/aacci-website/.
 
 `next build` writes plain HTML, CSS, JavaScript and files to `out/`. Any static host can serve it. No server is needed.
 
@@ -95,11 +95,13 @@ On `localhost`, forms only show a preview message and send nothing.
 
 ## Deployment
 
-The live site at **www.asian-african-mission.org** is deployed by GitHub Actions (`.github/workflows/ci.yml`). Every pull request is linted, type-checked and built. Every push to `main` is also uploaded to the web host over FTPS.
+The site is published to **GitHub Pages** at https://byte-barn.github.io/aacci-website/ by GitHub Actions (`.github/workflows/ci.yml`). Every pull request is linted, type-checked and built. Every push to `main` is also published.
 
-- **Settings:** the repository secrets `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD` and `FTP_PATH`. `FTP_PATH` is the web folder as the FTP account sees it (`/public_html`), and must already exist.
-- **Upload:** `.github/scripts/deploy_ftp.py` sends new and changed files, removes deleted ones, and keeps its list of deployed files on the server as `.deploy-manifest`.
-- **Redirects and headers:** `public/_redirects` and `public/_headers` are written in Netlify's format. The build turns them into an `.htaccess` with `.github/scripts/build_htaccess.py`, which also sets the 404 page. Edit those two files, not the `.htaccess`.
+- **Sub-path:** on GitHub Pages the site is served under `/aacci-website`, not at the root of a domain. The build reads the address from the repository's Pages settings and passes it in as `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL`. Adding a custom domain in those settings needs no code change.
+- **Writing paths:** `next/link` adds the sub-path by itself. Every image, plain `<a>`, `fetch` and form action must go through `asset()` from `src/lib/base.ts`, or it will break under the sub-path. Full addresses for metadata come from `abs()` in `src/lib/seo.ts`.
+- **Not available on GitHub Pages:** the redirects in `public/_redirects`, the headers in `public/_headers`, and Netlify Forms. Use Formspree for the forms (see above).
+
+To build locally the way the deploy does: `NEXT_PUBLIC_BASE_PATH=/aacci-website NEXT_PUBLIC_SITE_URL=https://byte-barn.github.io/aacci-website npm run build`.
 
 `netlify.toml` is kept so the site can also be built and published on Netlify.
 

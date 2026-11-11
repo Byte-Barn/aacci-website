@@ -2,13 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { asset } from '@/lib/base';
 
 type Entry = { t: string; u: string; k: string; s?: string; d?: string };
 const ORDER = ['Page', 'Person', 'Chapter', 'Event', 'Album', 'Committee', 'News'];
 const GROUP_LABEL: Record<string, string> = { Page: 'Pages', Person: 'People', Chapter: 'Chapters and representatives', Event: 'Events', Album: 'Photo albums', Committee: 'Committees', News: 'News' };
 
 let indexPromise: Promise<Entry[]> | null = null;
-const loadIndex = () => (indexPromise ??= fetch('/search-index.json').then((r) => r.json()));
+const loadIndex = () => (indexPromise ??= fetch(asset('/search-index.json')).then((r) => r.json()));
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function rank(index: Entry[], query: string) {
@@ -90,7 +91,7 @@ export function SearchBox({ initial = '', autoFocus = false, onNavigate }: { ini
             {g.items.map(({ e, i }) => {
               return (
                 <li key={e.u + e.t} id={`sr-${i}`} role="option" aria-selected={i === active} className={`search-item${i === active ? ' is-active' : ''}`} onMouseEnter={() => setActive(i)}>
-                  <a href={e.u} onClick={(ev) => { ev.preventDefault(); go(e); }}>
+                  <a href={asset(e.u)} onClick={(ev) => { ev.preventDefault(); go(e); }}>
                     <b><Highlight text={e.t} query={q} /></b>
                     {e.d ? <time dateTime={e.d}>{new Date(e.d).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</time> : null}
                     {e.s ? <small><Highlight text={e.s.length > 140 ? e.s.slice(0, 140) + '…' : e.s} query={q} /></small> : null}

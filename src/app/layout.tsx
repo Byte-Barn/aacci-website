@@ -7,10 +7,11 @@ import Header from '@/components/client/Header';
 import SearchDialog from '@/components/client/Search';
 import { JsonLd } from '@/components/ui';
 import { OFFICES, SITE } from '@/content/data';
-import { organizationLd } from '@/lib/seo';
+import { abs, organizationLd } from '@/lib/seo';
 import '@/styles/main.css';
 import '@/styles/pages.css';
 import '@/styles/next.css';
+import { asset } from '@/lib/base';
 
 const archivo = Archivo({ subsets: ['latin'], axes: ['wdth'], variable: '--font-archivo', display: 'swap' });
 
@@ -24,8 +25,8 @@ export const metadata: Metadata = {
   publisher: SITE.legalName,
   keywords: ['AACCI', 'Asian-African Chamber of Commerce', 'Asia Africa trade', 'chamber of commerce', 'High Level Diplomatic Meet', 'Asian African Leadership Forum', 'trade facilitation', 'business networking', 'Ahmedabad'],
   category: 'business',
-  alternates: { canonical: '/', types: { 'application/rss+xml': [{ url: '/news/feed.xml', title: 'AACCI News' }] } },
-  openGraph: { type: 'website', siteName: SITE.name, locale: 'en_GB', url: '/', images: [{ url: '/img/og.jpg', width: 1200, height: 630, alt: SITE.name }] },
+  alternates: { canonical: abs('/'), types: { 'application/rss+xml': [{ url: abs('/news/feed.xml'), title: 'AACCI News' }] } },
+  openGraph: { type: 'website', siteName: SITE.name, locale: 'en_GB', url: abs('/'), images: [{ url: abs('/img/og.jpg'), width: 1200, height: 630, alt: SITE.name }] },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-image-preview': 'large', 'max-snippet': -1 } },
   formatDetection: { telephone: false },
@@ -63,10 +64,10 @@ function Footer() {
   const hq = OFFICES[0];
   return (
     <footer className="site-footer">
-      <img className="footer-mark" src="/img/aacci-logo-light.png" alt="" width={512} height={512} loading="lazy" aria-hidden="true" />
+      <img className="footer-mark" src={asset('/img/aacci-logo-light.png')} alt="" width={512} height={512} loading="lazy" aria-hidden="true" />
       <div className="wrap footer-grid">
         <div className="footer-brand">
-          <img src="/img/aacci-logo-light.png" alt="AACCI" width={72} height={72} loading="lazy" />
+          <img src={asset('/img/aacci-logo-light.png')} alt="AACCI" width={72} height={72} loading="lazy" />
           <p>{SITE.legalName}. A not-for-profit company registered with the Registrar of Companies, Gujarat.</p>
           <p className="footer-cin">CIN {SITE.cin}</p>
           <ul className="social">
@@ -102,7 +103,7 @@ function Footer() {
         <ul>
           {[['Terms of use', '/policies/#terms'], ['Privacy policy', '/policies/#privacy'], ['Disclaimer', '/policies/#disclaimer'],
             ['Cancellation and refunds', '/policies/#refunds'], ['News feed (RSS)', '/news/feed.xml']].map(([l, h]) => (
-            <li key={h}><a href={h}>{l}</a></li>
+            <li key={h}><a href={asset(h)}>{l}</a></li>
           ))}
         </ul>
       </div>

@@ -7,6 +7,7 @@ import { Btn, Cta, JsonLd, NewsCard, Partners, SectionHead, Stripes, Words } fro
 import { FACTS, RECENT_EVENTS, SITE } from '@/content/data';
 import { latestNews, mapData, toCard } from '@/lib/content';
 import { pageMeta, websiteLd } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const metadata: Metadata = {
   ...pageMeta({ title: `${SITE.name} (AACCI)`, description: SITE.description, path: '/' }),
@@ -25,7 +26,7 @@ export default function Home() {
             <span className="line"><span>for two continents.</span></span>
           </h1>
           <div className="hero-row">
-            <img className="hero-mark" src="/img/aacci-emblem-light.png" alt="" width={464} height={269} aria-hidden="true" />
+            <img className="hero-mark" src={asset('/img/aacci-emblem-light.png')} alt="" width={464} height={269} aria-hidden="true" />
             <div className="hero-side">
               <p className="hero-lead">AACCI brings together chambers of commerce, companies and professionals from more than 100 countries to trade, invest and shape policy across Asia and Africa.</p>
               <div className="hero-actions">

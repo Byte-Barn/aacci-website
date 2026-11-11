@@ -3,6 +3,7 @@ import type { CSSProperties, ReactNode } from 'react';
 import { PARTNERS, SITE } from '@/content/data';
 import { REGION_LABEL, formatDate, type NewsCardData } from '@/lib/format';
 import { breadcrumbLd } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 type HeadingTag = 'h1' | 'h2' | 'h3';
 
@@ -55,7 +56,7 @@ export function PageHero({
         {actions ? <div className="page-hero-actions">{actions}</div> : null}
       </div>
       {children}
-      {mark && !children ? <img className="page-hero-mark" src="/img/aacci-logo-light.png" alt="" width={512} height={512} /> : null}
+      {mark && !children ? <img className="page-hero-mark" src={asset('/img/aacci-logo-light.png')} alt="" width={512} height={512} /> : null}
       {!children ? <div className="page-hero-stripes" aria-hidden="true"><i /><i /><i /></div> : null}
     </section>
   );
@@ -86,10 +87,10 @@ export function NewsCard({ post, lead = false }: { post: NewsCardData; lead?: bo
       <Link href={`/news/${post.slug}/`} prefetch={false}>
         <div className="story-media fx" data-tilt="">
           {post.image ? (
-            <img className="story-img" src={lead ? post.image.src : post.image.thumb} alt="" width={post.image.w} height={post.image.h} loading="lazy" decoding="async" />
+            <img className="story-img" src={asset(lead ? post.image.src : post.image.thumb)} alt="" width={post.image.w} height={post.image.h} loading="lazy" decoding="async" />
           ) : (
             <div className="story-media--brand" data-region={post.region} style={{ position: 'absolute', inset: 0 }}>
-              <img className="brand-mark" src="/img/aacci-emblem-light.png" alt="" width={464} height={269} loading="lazy" />
+              <img className="brand-mark" src={asset('/img/aacci-emblem-light.png')} alt="" width={464} height={269} loading="lazy" />
               <span className="brand-region">{label}</span>
             </div>
           )}
@@ -116,7 +117,7 @@ export function Partners({ id = 'partners' }: { id?: string }) {
           <ul className={`marquee-row${r % 2 ? ' marquee-row--reverse' : ''}`} key={r}>
             {[...row, ...row].map((p, i) => (
               <li key={i} {...(i >= row.length ? { 'data-clone': '', 'aria-hidden': true } : {})}>
-                <img src={`/img/partners/${p.file}.webp`} alt={i >= row.length ? '' : p.name} width={200} height={200} loading="lazy" />
+                <img src={asset(`/img/partners/${p.file}.webp`)} alt={i >= row.length ? '' : p.name} width={200} height={200} loading="lazy" />
               </li>
             ))}
           </ul>

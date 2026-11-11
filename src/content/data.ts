@@ -1,7 +1,8 @@
 // Hand-maintained content for the AACCI site. Facts come from asianafrican.org.
 
 export const SITE = {
-  url: 'https://asianafricanmission.org',
+  // Public address, without a trailing slash. The deploy sets NEXT_PUBLIC_SITE_URL; it includes any sub-path.
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://asianafricanmission.org').replace(/\/$/, ''),
   name: 'Asian-African Chamber of Commerce & Industry',
   legalName: 'Asian-African Chamber of Commerce and Industry Foundation',
   short: 'AACCI',

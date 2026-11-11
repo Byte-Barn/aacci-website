@@ -6,6 +6,7 @@ import { usd } from '@/lib/format';
 import type { MapData, Member } from '@/lib/content';
 import { useIntro, useLocationSearch, useMotion } from './hooks';
 import WorldMap from './WorldMap';
+import { asset } from '@/lib/base';
 
 const motionOn = () => typeof document !== 'undefined' && document.documentElement.classList.contains('motion');
 
@@ -23,7 +24,7 @@ export function HeroIntro() {
   if (!intro || done) return null;
   return (
     <div className="loader" aria-hidden="true">
-      <img className="loader-logo" src="/img/aacci-logo-light.png" alt="" width={120} height={120} />
+      <img className="loader-logo" src={asset('/img/aacci-logo-light.png')} alt="" width={120} height={120} />
       <span className="loader-stripe loader-stripe--r" /><span className="loader-stripe loader-stripe--g" /><span className="loader-stripe loader-stripe--o" />
     </div>
   );
@@ -89,7 +90,7 @@ export function Timeline() {
           {TIMELINE.map((y) => (
             <li key={y.year} className={`tl-year${y.photo ? ' tl-year--photo' : ''}${current === y.year ? ' is-current' : ''}`} data-year={y.year}>
               <h3 className="tl-label">{y.year}</h3>
-              {y.photo ? <div className="fx tl-fx" data-tilt=""><img className="tl-photo" src={y.photo.src} alt={y.photo.alt} width={640} height={360} loading="lazy" decoding="async" /></div> : null}
+              {y.photo ? <div className="fx tl-fx" data-tilt=""><img className="tl-photo" src={asset(y.photo.src)} alt={y.photo.alt} width={640} height={360} loading="lazy" decoding="async" /></div> : null}
               <ul className="tl-events">
                 {y.events.map((e) => (
                   <li key={e.name}>

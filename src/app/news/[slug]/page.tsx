@@ -5,6 +5,7 @@ import { JsonLd, NewsCard, Prose } from '@/components/ui';
 import { SITE } from '@/content/data';
 import { REGION_LABEL, formatDate, news, newsBySlug, readingTime, relatedNews, toCard } from '@/lib/content';
 import { articleLd, breadcrumbLd, pageMeta } from '@/lib/seo';
+import { asset } from '@/lib/base';
 
 export const dynamicParams = false;
 export const generateStaticParams = () => news.map((p) => ({ slug: p.slug }));
@@ -38,12 +39,12 @@ export default async function Article({ params }: { params: Promise<{ slug: stri
               <time dateTime={post.date.slice(0, 10)}>{formatDate(post.date)}</time>
             </p>
             <h1 className="article-title">{post.title}</h1>
-            <p className="article-byline"><img src="/img/aacci-logo-light.png" alt="" width={40} height={40} />AACCI Newsroom<span aria-hidden="true"> </span><span className="article-read">{readingTime(post.words)} min read</span></p>
+            <p className="article-byline"><img src={asset('/img/aacci-logo-light.png')} alt="" width={40} height={40} />AACCI Newsroom<span aria-hidden="true"> </span><span className="article-read">{readingTime(post.words)} min read</span></p>
           </div>
         </header>
         <div className="wrap narrow">
           {post.image ? (
-            <figure className="article-figure fx" data-tilt=""><img src={post.image.src} alt="" width={post.image.w} height={post.image.h} /></figure>
+            <figure className="article-figure fx" data-tilt=""><img src={asset(post.image.src)} alt="" width={post.image.w} height={post.image.h} /></figure>
           ) : null}
           <Prose className="prose article-body" html={post.html || `<p>${post.excerpt}</p>`} />
           <div className="share">
