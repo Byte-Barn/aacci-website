@@ -71,14 +71,41 @@ jobs:
           name: site
           path: out
 
+      # FTP_HOST must end up as a bare server name. Tolerate common paste
+      # mistakes (ftp:// prefix, user@, :port, a trailing path, whitespace)
+      # and say which one was found, without printing the value.
+      - name: Check the FTP host
+        id: ftp
+        env:
+          RAW: ${{ secrets.FTP_HOST }}
+        run: |
+          host="$(printf '%s' "$RAW" | tr -d '[:space:]')"
+          if [ -z "$host" ]; then echo "::error::The FTP_HOST secret is empty."; exit 1; fi
+          if [ "$host" != "$RAW" ]; then echo "::warning::FTP_HOST contains whitespace; ignoring it."; fi
+          case "$host" in *://*) echo "::warning::FTP_HOST starts with a scheme such as ftp://; ignoring it."; host="${host#*://}";; esac
+          case "$host" in */*) echo "::warning::FTP_HOST contains a path; ignoring it. Folders belong in FTP_PATH."; host="${host%%/*}";; esac
+          case "$host" in *@*) echo "::warning::FTP_HOST contains user@; ignoring it."; host="${host##*@}";; esac
+          port=""
+          case "$host" in *:*) echo "::warning::FTP_HOST contains a port; using it."; port="${host##*:}"; host="${host%%:*}";; esac
+          echo "::add-mask::$host"
+          if ! getent hosts "$host" > /dev/null; then
+            case "$host" in
+              *.*) echo "::error::FTP_HOST looks like a server name but does not exist in DNS. Check it for a typo, or use the server's IP address.";;
+              *) echo "::error::FTP_HOST has no dot in it, so it is not a server name. It should look like ftp.example.org.";;
+            esac
+            exit 1
+          fi
+          echo "host=$host" >> "$GITHUB_OUTPUT"
+          echo "port=$port" >> "$GITHUB_OUTPUT"
+
       - name: Upload to the web host
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ${{ secrets.FTP_HOST }}
+          server: ${{ steps.ftp.outputs.host }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
-          port: ${{ vars.FTP_PORT || 21 }}
+          port: ${{ steps.ftp.outputs.port || vars.FTP_PORT || 21 }}
           local-dir: ./out/
           # The action requires a trailing slash; add one if the secret has none.
           server-dir: ${{ endsWith(secrets.FTP_PATH, '/') && secrets.FTP_PATH || format('{0}/', secrets.FTP_PATH) }}
