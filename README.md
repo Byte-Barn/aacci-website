@@ -95,6 +95,12 @@ On `localhost`, forms only show a preview message and send nothing.
 
 ## Deployment
 
-`netlify.toml` builds with `npm run build` and publishes `out/`. `public/_headers` adds security headers and caching rules. Other hosts work too: serve `out/` and apply the redirects in `public/_redirects` in that host's format.
+The live site at **www.asian-african-mission.org** is deployed by GitHub Actions (`.github/workflows/ci.yml`). Every pull request is linted, type-checked and built. Every push to `main` is also uploaded to the web host over FTPS.
+
+- **Settings:** the repository secrets `FTP_HOST`, `FTP_USERNAME`, `FTP_PASSWORD` and `FTP_PATH`. `FTP_PATH` is the web folder as the FTP account sees it (`/public_html`), and must already exist.
+- **Upload:** `.github/scripts/deploy_ftp.py` sends new and changed files, removes deleted ones, and keeps its list of deployed files on the server as `.deploy-manifest`.
+- **Redirects and headers:** `public/_redirects` and `public/_headers` are written in Netlify's format. The build turns them into an `.htaccess` with `.github/scripts/build_htaccess.py`, which also sets the 404 page. Edit those two files, not the `.htaccess`.
+
+`netlify.toml` is kept so the site can also be built and published on Netlify.
 
 Content corrections made against the current site, and open questions for the chamber, are listed in [docs/content-audit.md](docs/content-audit.md).
