@@ -6,7 +6,7 @@ Reads   content/raw/aacci-site.json   pages, council and advisory board, policie
         content/raw/news-all.json     all WordPress posts (text, dates, categories, image URLs) and page slugs
         content/raw/gallery.json      event albums (built by scripts/optimize_hires.py)
         content/raw/news-images/      optional original news images named news__<post id>.<ext>
-Writes  src/content/*.json and public/img/news/<slug>.webp (+ -t.webp thumbnails)
+Writes  src/content/*.json and public/img/news/<short slug>-<post id>.webp (+ -t.webp thumbnails)
 """
 import html
 import json
@@ -184,9 +184,19 @@ def trim(text, n):
     return cut + '…'
 
 
-def news_image(post, slug):
-    """Return /img/news/<slug>.webp if we have it, processing an original from content/raw/news-images when present."""
-    target = NEWS_IMG / f'{slug}.webp'
+def image_stem(post):
+    """Short file name for a news image: the start of the slug plus the post id, e.g. africas-green-minerals-drive-a-new-era-8584.
+    Keeps paths well under the 260-character Windows limit when the repo is cloned into a deep folder."""
+    slug = post['slug']
+    if len(slug) > 40:
+        slug = slug[:40].rsplit('-', 1)[0]
+    return f'{slug}-{post["id"]}'
+
+
+def news_image(post):
+    """Return /img/news/<stem>.webp if we have it, processing an original from content/raw/news-images when present."""
+    stem = image_stem(post)
+    target = NEWS_IMG / f'{stem}.webp'
     if not target.exists():
         originals = list((RAW / 'news-images').glob(f'news__{post["id"]}.*')) if (RAW / 'news-images').exists() else []
         if originals:
@@ -198,7 +208,7 @@ def news_image(post, slug):
             big.save(target, 'WEBP', quality=80, method=6)
     if not target.exists():
         return None
-    thumb = NEWS_IMG / f'{slug}-t.webp'
+    thumb = NEWS_IMG / f'{stem}-t.webp'
     if not thumb.exists():
         from PIL import Image
         im = Image.open(target)
@@ -206,7 +216,7 @@ def news_image(post, slug):
         im.save(thumb, 'WEBP', quality=76, method=6)
     from PIL import Image
     w, h = Image.open(target).size
-    return {'src': f'/img/news/{slug}.webp', 'thumb': f'/img/news/{slug}-t.webp', 'w': w, 'h': h}
+    return {'src': f'/img/news/{stem}.webp', 'thumb': f'/img/news/{stem}-t.webp', 'w': w, 'h': h}
 
 
 def news():
@@ -229,7 +239,7 @@ def news():
         kept.append({
             'slug': p['slug'], 'title': title, 'date': p['date'], 'modified': p['modified'],
             'region': region, 'excerpt': trim(excerpt, 260), 'html': body,
-            'words': len(plain(body).split()), 'image': news_image(p, p['slug']), 'source': p['link'],
+            'words': len(plain(body).split()), 'image': news_image(p), 'source': p['link'],
         })
     return kept, merged
 
