@@ -34,4 +34,4 @@ jobs:
           FTP_PORT: ${{ vars.FTP_PORT || '21' }}
           FTP_VERIFY_CERT: ${{ vars.FTP_VERIFY_CERT || 'true' }}
           FOLDER: ${{ inputs.folder }}
-        run: python3 .github/scripts/cleanup_stray.py "$FOLDER"
+        run: python3 .github/scripts/cleanup_stray.py "$FOLDER" .github/scripts/stray_extra.txt

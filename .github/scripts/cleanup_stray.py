@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """One-off: remove a copy of the site that an early deploy put in the wrong folder.
 
-    cleanup_stray.py <stray folder on the server>
+    cleanup_stray.py <stray folder on the server> [file listing more paths]
 
-Deletes only the files named in that folder's own .deploy-manifest, the
-manifest itself, and folders that are empty afterwards (the server refuses to
+Deletes only the files named in that folder's own .deploy-manifest, any paths
+listed (one per line, relative to the folder) in the optional second argument,
+the manifest itself, and folders that are empty afterwards (the server refuses to
 remove a folder that still has anything in it). Refuses to touch FTP_PATH.
 Connection settings come from the same environment as deploy_ftp.py.
 """
@@ -22,8 +23,10 @@ ERRORS = (ftplib.Error, OSError, EOFError)
 
 
 def main() -> None:
-    if len(sys.argv) != 2:
+    if len(sys.argv) not in (2, 3):
         sys.exit(__doc__)
+    extra = [line.strip() for line in open(sys.argv[2])] if len(sys.argv) == 3 else []
+    extra = [line for line in extra if line and not line.startswith(('/', '.')) and '..' not in line.split('/')]
     stray = "/" + sys.argv[1].strip().strip("/")
     server = Server()
     live = server.root.rstrip("/")
@@ -35,9 +38,11 @@ def main() -> None:
     try:
         ftp.retrbinary(f"RETR {stray}/{MANIFEST}", buffer.write)
     except ftplib.error_perm:
-        fail("No .deploy-manifest in that folder, so there is no list of what to remove. Nothing was deleted.")
+        if not extra:
+            fail("No .deploy-manifest in that folder, so there is no list of what to remove. Nothing was deleted.")
+        print("No .deploy-manifest in that folder; using only the listed paths.", flush=True)
     ftp.quit()
-    files = sorted(parse_manifest(buffer.getvalue().decode()))
+    files = sorted(set(parse_manifest(buffer.getvalue().decode())) | set(extra))
     print(f"Listed for removal: {len(files)} files.", flush=True)
 
     local = threading.local()
