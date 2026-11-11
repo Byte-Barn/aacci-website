@@ -1,0 +1,930 @@
+{
+ "albums": [
+  {
+   "slug": "secretariat-2022",
+   "title": "Global Secretariat opening",
+   "meta": "Ahmedabad, 24 December 2022",
+   "photos": [
+    {
+     "full": "gallery/secretariat-2022/01.webp",
+     "thumb": "gallery/secretariat-2022/01-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/02.webp",
+     "thumb": "gallery/secretariat-2022/02-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/03.webp",
+     "thumb": "gallery/secretariat-2022/03-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/04.webp",
+     "thumb": "gallery/secretariat-2022/04-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/05.webp",
+     "thumb": "gallery/secretariat-2022/05-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/06.webp",
+     "thumb": "gallery/secretariat-2022/06-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/07.webp",
+     "thumb": "gallery/secretariat-2022/07-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/08.webp",
+     "thumb": "gallery/secretariat-2022/08-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/09.webp",
+     "thumb": "gallery/secretariat-2022/09-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/10.webp",
+     "thumb": "gallery/secretariat-2022/10-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/secretariat-2022/11.webp",
+     "thumb": "gallery/secretariat-2022/11-t.webp",
+     "w": 1500,
+     "h": 600
+    }
+   ]
+  },
+  {
+   "slug": "hldm-2024",
+   "title": "High Level Diplomatic Meet, Series VI",
+   "meta": "IIC, New Delhi, 2024",
+   "photos": [
+    {
+     "full": "gallery/hldm-2024/01.webp",
+     "thumb": "gallery/hldm-2024/01-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2024/02.webp",
+     "thumb": "gallery/hldm-2024/02-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2024/03.webp",
+     "thumb": "gallery/hldm-2024/03-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2024/04.webp",
+     "thumb": "gallery/hldm-2024/04-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2024/05.webp",
+     "thumb": "gallery/hldm-2024/05-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2024/06.webp",
+     "thumb": "gallery/hldm-2024/06-t.webp",
+     "w": 1500,
+     "h": 600
+    }
+   ]
+  },
+  {
+   "slug": "aaef-2024",
+   "title": "Asian African Economic Forum 2024",
+   "meta": "Bangkok, 4 October 2024",
+   "photos": [
+    {
+     "full": "gallery/aaef-2024/01.webp",
+     "thumb": "gallery/aaef-2024/01-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/aaef-2024/02.webp",
+     "thumb": "gallery/aaef-2024/02-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/aaef-2024/03.webp",
+     "thumb": "gallery/aaef-2024/03-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/aaef-2024/04.webp",
+     "thumb": "gallery/aaef-2024/04-t.webp",
+     "w": 1500,
+     "h": 600
+    }
+   ]
+  },
+  {
+   "slug": "awards-nigeria-2023",
+   "title": "Leadership and Corporate Governance Awards",
+   "meta": "Abuja, Nigeria, 2 May 2023",
+   "photos": [
+    {
+     "full": "gallery/awards-nigeria-2023/01.webp",
+     "thumb": "gallery/awards-nigeria-2023/01-t.webp",
+     "w": 780,
+     "h": 1040
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/02.webp",
+     "thumb": "gallery/awards-nigeria-2023/02-t.webp",
+     "w": 720,
+     "h": 1080
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/03.webp",
+     "thumb": "gallery/awards-nigeria-2023/03-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/04.webp",
+     "thumb": "gallery/awards-nigeria-2023/04-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/05.webp",
+     "thumb": "gallery/awards-nigeria-2023/05-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/06.webp",
+     "thumb": "gallery/awards-nigeria-2023/06-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/07.webp",
+     "thumb": "gallery/awards-nigeria-2023/07-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/08.webp",
+     "thumb": "gallery/awards-nigeria-2023/08-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/09.webp",
+     "thumb": "gallery/awards-nigeria-2023/09-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/10.webp",
+     "thumb": "gallery/awards-nigeria-2023/10-t.webp",
+     "w": 1200,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/11.webp",
+     "thumb": "gallery/awards-nigeria-2023/11-t.webp",
+     "w": 1080,
+     "h": 720
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/12.webp",
+     "thumb": "gallery/awards-nigeria-2023/12-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/13.webp",
+     "thumb": "gallery/awards-nigeria-2023/13-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/14.webp",
+     "thumb": "gallery/awards-nigeria-2023/14-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/15.webp",
+     "thumb": "gallery/awards-nigeria-2023/15-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/16.webp",
+     "thumb": "gallery/awards-nigeria-2023/16-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/17.webp",
+     "thumb": "gallery/awards-nigeria-2023/17-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/18.webp",
+     "thumb": "gallery/awards-nigeria-2023/18-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/19.webp",
+     "thumb": "gallery/awards-nigeria-2023/19-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/20.webp",
+     "thumb": "gallery/awards-nigeria-2023/20-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/21.webp",
+     "thumb": "gallery/awards-nigeria-2023/21-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/awards-nigeria-2023/22.webp",
+     "thumb": "gallery/awards-nigeria-2023/22-t.webp",
+     "w": 1200,
+     "h": 900
+    }
+   ]
+  },
+  {
+   "slug": "ibcci-mou-2022",
+   "title": "MoU with the India-Bangladesh Chamber of Commerce and Industry",
+   "meta": "27 November 2022",
+   "photos": [
+    {
+     "full": "gallery/ibcci-mou-2022/01.webp",
+     "thumb": "gallery/ibcci-mou-2022/01-t.webp",
+     "w": 1526,
+     "h": 1017
+    },
+    {
+     "full": "gallery/ibcci-mou-2022/02.webp",
+     "thumb": "gallery/ibcci-mou-2022/02-t.webp",
+     "w": 1526,
+     "h": 1017
+    },
+    {
+     "full": "gallery/ibcci-mou-2022/03.webp",
+     "thumb": "gallery/ibcci-mou-2022/03-t.webp",
+     "w": 1526,
+     "h": 1016
+    }
+   ]
+  },
+  {
+   "slug": "hldm-2022-s3",
+   "title": "High Level Diplomatic Meet 2022, session 3",
+   "meta": "IIC, New Delhi, 19 November 2022",
+   "photos": [
+    {
+     "full": "gallery/hldm-2022-s3/01.webp",
+     "thumb": "gallery/hldm-2022-s3/01-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/02.webp",
+     "thumb": "gallery/hldm-2022-s3/02-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/03.webp",
+     "thumb": "gallery/hldm-2022-s3/03-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/04.webp",
+     "thumb": "gallery/hldm-2022-s3/04-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/05.webp",
+     "thumb": "gallery/hldm-2022-s3/05-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/06.webp",
+     "thumb": "gallery/hldm-2022-s3/06-t.webp",
+     "w": 1500,
+     "h": 600
+    },
+    {
+     "full": "gallery/hldm-2022-s3/07.webp",
+     "thumb": "gallery/hldm-2022-s3/07-t.webp",
+     "w": 1500,
+     "h": 600
+    }
+   ]
+  },
+  {
+   "slug": "aalf-4",
+   "title": "Asian–African Leadership Forum, fourth edition",
+   "meta": "IIC, New Delhi, 24 April 2022",
+   "photos": [
+    {
+     "full": "gallery/aalf-4/01.webp",
+     "thumb": "gallery/aalf-4/01-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/aalf-4/02.webp",
+     "thumb": "gallery/aalf-4/02-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/aalf-4/03.webp",
+     "thumb": "gallery/aalf-4/03-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/aalf-4/04.webp",
+     "thumb": "gallery/aalf-4/04-t.webp",
+     "w": 1200,
+     "h": 675
+    },
+    {
+     "full": "gallery/aalf-4/05.webp",
+     "thumb": "gallery/aalf-4/05-t.webp",
+     "w": 1200,
+     "h": 801
+    }
+   ]
+  },
+  {
+   "slug": "hldm-2022-s1",
+   "title": "High Level Diplomatic Meet 2022, session 1",
+   "meta": "IIC, New Delhi, 19 March 2022",
+   "photos": [
+    {
+     "full": "gallery/hldm-2022-s1/01.webp",
+     "thumb": "gallery/hldm-2022-s1/01-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/02.webp",
+     "thumb": "gallery/hldm-2022-s1/02-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/03.webp",
+     "thumb": "gallery/hldm-2022-s1/03-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/04.webp",
+     "thumb": "gallery/hldm-2022-s1/04-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/05.webp",
+     "thumb": "gallery/hldm-2022-s1/05-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/06.webp",
+     "thumb": "gallery/hldm-2022-s1/06-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/07.webp",
+     "thumb": "gallery/hldm-2022-s1/07-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/08.webp",
+     "thumb": "gallery/hldm-2022-s1/08-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/hldm-2022-s1/09.webp",
+     "thumb": "gallery/hldm-2022-s1/09-t.webp",
+     "w": 1200,
+     "h": 801
+    }
+   ]
+  },
+  {
+   "slug": "chennai-2019",
+   "title": "Launch of the 5th chapter office",
+   "meta": "Chennai, 6 December 2019",
+   "photos": [
+    {
+     "full": "gallery/chennai-2019/01.webp",
+     "thumb": "gallery/chennai-2019/01-t.webp",
+     "w": 600,
+     "h": 400
+    },
+    {
+     "full": "gallery/chennai-2019/02.webp",
+     "thumb": "gallery/chennai-2019/02-t.webp",
+     "w": 640,
+     "h": 960
+    },
+    {
+     "full": "gallery/chennai-2019/03.webp",
+     "thumb": "gallery/chennai-2019/03-t.webp",
+     "w": 1120,
+     "h": 747
+    },
+    {
+     "full": "gallery/chennai-2019/04.webp",
+     "thumb": "gallery/chennai-2019/04-t.webp",
+     "w": 1120,
+     "h": 747
+    },
+    {
+     "full": "gallery/chennai-2019/05.webp",
+     "thumb": "gallery/chennai-2019/05-t.webp",
+     "w": 1120,
+     "h": 747
+    },
+    {
+     "full": "gallery/chennai-2019/06.webp",
+     "thumb": "gallery/chennai-2019/06-t.webp",
+     "w": 1120,
+     "h": 747
+    }
+   ]
+  },
+  {
+   "slug": "auto-show-2019",
+   "title": "India Auto Show 2019",
+   "meta": "Mumbai, 3 October 2019",
+   "photos": [
+    {
+     "full": "gallery/auto-show-2019/01.webp",
+     "thumb": "gallery/auto-show-2019/01-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/auto-show-2019/02.webp",
+     "thumb": "gallery/auto-show-2019/02-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/auto-show-2019/03.webp",
+     "thumb": "gallery/auto-show-2019/03-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/auto-show-2019/04.webp",
+     "thumb": "gallery/auto-show-2019/04-t.webp",
+     "w": 1200,
+     "h": 800
+    },
+    {
+     "full": "gallery/auto-show-2019/05.webp",
+     "thumb": "gallery/auto-show-2019/05-t.webp",
+     "w": 1200,
+     "h": 800
+    }
+   ]
+  },
+  {
+   "slug": "lagos-chancery-2019",
+   "title": "Courtesy meeting with the High Commission of India",
+   "meta": "Lagos, 18 July 2019",
+   "photos": [
+    {
+     "full": "gallery/lagos-chancery-2019/01.webp",
+     "thumb": "gallery/lagos-chancery-2019/01-t.webp",
+     "w": 1080,
+     "h": 810
+    },
+    {
+     "full": "gallery/lagos-chancery-2019/02.webp",
+     "thumb": "gallery/lagos-chancery-2019/02-t.webp",
+     "w": 1080,
+     "h": 810
+    },
+    {
+     "full": "gallery/lagos-chancery-2019/03.webp",
+     "thumb": "gallery/lagos-chancery-2019/03-t.webp",
+     "w": 1080,
+     "h": 810
+    }
+   ]
+  },
+  {
+   "slug": "sme-seminar-2019",
+   "title": "Seminar on the impact of SMEs on Africa's economic development",
+   "meta": "Lagos, 27 April 2019",
+   "photos": [
+    {
+     "full": "gallery/sme-seminar-2019/01.webp",
+     "thumb": "gallery/sme-seminar-2019/01-t.webp",
+     "w": 1080,
+     "h": 810
+    },
+    {
+     "full": "gallery/sme-seminar-2019/02.webp",
+     "thumb": "gallery/sme-seminar-2019/02-t.webp",
+     "w": 620,
+     "h": 877
+    },
+    {
+     "full": "gallery/sme-seminar-2019/03.webp",
+     "thumb": "gallery/sme-seminar-2019/03-t.webp",
+     "w": 1080,
+     "h": 810
+    },
+    {
+     "full": "gallery/sme-seminar-2019/04.webp",
+     "thumb": "gallery/sme-seminar-2019/04-t.webp",
+     "w": 810,
+     "h": 1080
+    },
+    {
+     "full": "gallery/sme-seminar-2019/05.webp",
+     "thumb": "gallery/sme-seminar-2019/05-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/sme-seminar-2019/06.webp",
+     "thumb": "gallery/sme-seminar-2019/06-t.webp",
+     "w": 810,
+     "h": 1080
+    },
+    {
+     "full": "gallery/sme-seminar-2019/07.webp",
+     "thumb": "gallery/sme-seminar-2019/07-t.webp",
+     "w": 1080,
+     "h": 810
+    },
+    {
+     "full": "gallery/sme-seminar-2019/08.webp",
+     "thumb": "gallery/sme-seminar-2019/08-t.webp",
+     "w": 1080,
+     "h": 810
+    }
+   ]
+  },
+  {
+   "slug": "ip-fest-2019",
+   "title": "Intellectual Property Festival 2019",
+   "meta": "IP FEST 2019",
+   "photos": [
+    {
+     "full": "gallery/ip-fest-2019/01.webp",
+     "thumb": "gallery/ip-fest-2019/01-t.webp",
+     "w": 1124,
+     "h": 750
+    },
+    {
+     "full": "gallery/ip-fest-2019/02.webp",
+     "thumb": "gallery/ip-fest-2019/02-t.webp",
+     "w": 1124,
+     "h": 750
+    },
+    {
+     "full": "gallery/ip-fest-2019/03.webp",
+     "thumb": "gallery/ip-fest-2019/03-t.webp",
+     "w": 1124,
+     "h": 750
+    },
+    {
+     "full": "gallery/ip-fest-2019/04.webp",
+     "thumb": "gallery/ip-fest-2019/04-t.webp",
+     "w": 1124,
+     "h": 750
+    }
+   ]
+  },
+  {
+   "slug": "council-induction-2018",
+   "title": "Governing council and advisory board induction",
+   "meta": "Colombo, 29 October 2018",
+   "photos": [
+    {
+     "full": "gallery/council-induction-2018/01.webp",
+     "thumb": "gallery/council-induction-2018/01-t.webp",
+     "w": 1080,
+     "h": 720
+    },
+    {
+     "full": "gallery/council-induction-2018/02.webp",
+     "thumb": "gallery/council-induction-2018/02-t.webp",
+     "w": 1080,
+     "h": 720
+    },
+    {
+     "full": "gallery/council-induction-2018/03.webp",
+     "thumb": "gallery/council-induction-2018/03-t.webp",
+     "w": 1080,
+     "h": 720
+    },
+    {
+     "full": "gallery/council-induction-2018/04.webp",
+     "thumb": "gallery/council-induction-2018/04-t.webp",
+     "w": 1080,
+     "h": 720
+    }
+   ]
+  },
+  {
+   "slug": "healthcare-2018",
+   "title": "Global Healthcare Leadership Forum",
+   "meta": "Ahmedabad, 20 October 2018",
+   "photos": [
+    {
+     "full": "gallery/healthcare-2018/01.webp",
+     "thumb": "gallery/healthcare-2018/01-t.webp",
+     "w": 1024,
+     "h": 683
+    },
+    {
+     "full": "gallery/healthcare-2018/02.webp",
+     "thumb": "gallery/healthcare-2018/02-t.webp",
+     "w": 1024,
+     "h": 683
+    },
+    {
+     "full": "gallery/healthcare-2018/03.webp",
+     "thumb": "gallery/healthcare-2018/03-t.webp",
+     "w": 1024,
+     "h": 683
+    },
+    {
+     "full": "gallery/healthcare-2018/04.webp",
+     "thumb": "gallery/healthcare-2018/04-t.webp",
+     "w": 1024,
+     "h": 678
+    }
+   ]
+  },
+  {
+   "slug": "atigs-2018",
+   "title": "Africa Trade and Investment Global Summit",
+   "meta": "Washington D.C., 24–26 June 2018",
+   "photos": [
+    {
+     "full": "gallery/atigs-2018/01.webp",
+     "thumb": "gallery/atigs-2018/01-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/atigs-2018/02.webp",
+     "thumb": "gallery/atigs-2018/02-t.webp",
+     "w": 1200,
+     "h": 900
+    },
+    {
+     "full": "gallery/atigs-2018/03.webp",
+     "thumb": "gallery/atigs-2018/03-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/atigs-2018/04.webp",
+     "thumb": "gallery/atigs-2018/04-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/atigs-2018/05.webp",
+     "thumb": "gallery/atigs-2018/05-t.webp",
+     "w": 900,
+     "h": 1200
+    }
+   ]
+  },
+  {
+   "slug": "sme-summit-2018",
+   "title": "Global SME Summit",
+   "meta": "Lagos, 8 April 2018",
+   "photos": [
+    {
+     "full": "gallery/sme-summit-2018/01.webp",
+     "thumb": "gallery/sme-summit-2018/01-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/sme-summit-2018/02.webp",
+     "thumb": "gallery/sme-summit-2018/02-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/sme-summit-2018/03.webp",
+     "thumb": "gallery/sme-summit-2018/03-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/sme-summit-2018/04.webp",
+     "thumb": "gallery/sme-summit-2018/04-t.webp",
+     "w": 853,
+     "h": 1200
+    }
+   ]
+  },
+  {
+   "slug": "dubai",
+   "title": "Dubai: a hub for international business",
+   "meta": "Dubai",
+   "photos": [
+    {
+     "full": "gallery/dubai/01.webp",
+     "thumb": "gallery/dubai/01-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/02.webp",
+     "thumb": "gallery/dubai/02-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/03.webp",
+     "thumb": "gallery/dubai/03-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/04.webp",
+     "thumb": "gallery/dubai/04-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/05.webp",
+     "thumb": "gallery/dubai/05-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/06.webp",
+     "thumb": "gallery/dubai/06-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/07.webp",
+     "thumb": "gallery/dubai/07-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/08.webp",
+     "thumb": "gallery/dubai/08-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/09.webp",
+     "thumb": "gallery/dubai/09-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/10.webp",
+     "thumb": "gallery/dubai/10-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/11.webp",
+     "thumb": "gallery/dubai/11-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/12.webp",
+     "thumb": "gallery/dubai/12-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/13.webp",
+     "thumb": "gallery/dubai/13-t.webp",
+     "w": 1200,
+     "h": 801
+    },
+    {
+     "full": "gallery/dubai/14.webp",
+     "thumb": "gallery/dubai/14-t.webp",
+     "w": 1200,
+     "h": 801
+    }
+   ]
+  },
+  {
+   "slug": "fccisl",
+   "title": "Partnership with the Federation of Chambers of Commerce and Industry of Sri Lanka",
+   "meta": "Sri Lanka",
+   "photos": [
+    {
+     "full": "gallery/fccisl/01.webp",
+     "thumb": "gallery/fccisl/01-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/fccisl/02.webp",
+     "thumb": "gallery/fccisl/02-t.webp",
+     "w": 900,
+     "h": 1200
+    },
+    {
+     "full": "gallery/fccisl/03.webp",
+     "thumb": "gallery/fccisl/03-t.webp",
+     "w": 900,
+     "h": 1200
+    }
+   ]
+  }
+ ],
+ "news": {
+  "dangotes-16-billion-kenya-refinery-project": "news/dangotes-16-billion-kenya-refinery-project.webp",
+  "zambias-copper-boom-a-new-era-of-mining-investment": "news/zambias-copper-boom-a-new-era-of-mining-investment.webp",
+  "ethiopias-us12-5-billion-bishoftu-international-airport-project-gains-global-momentum": "news/ethiopias-us12-5-billion-bishoftu-international-airport-project-gains-global-momentum.webp",
+  "india-uk-ceta-enters-into-force-a-new-era-of-trade-economic-cooperation-2": "news/india-uk-ceta-enters-into-force-a-new-era-of-trade-economic-cooperation-2.webp",
+  "india-uk-ceta-enters-into-force-a-new-era-of-trade-economic-cooperation": "news/india-uk-ceta-enters-into-force-a-new-era-of-trade-economic-cooperation.webp",
+  "africas-green-minerals-drive-a-new-era-of-industrial-partnerships-clean-energy-investment-and-value-added-manufacturing": "news/africas-green-minerals-drive-a-new-era-of-industrial-partnerships-clean-energy-investment-and-value-added-manufacturing.webp",
+  "asian-markets-surge-on-ai-semiconductor-momentum": "news/asian-markets-surge-on-ai-semiconductor-momentum.webp",
+  "google-surpasses-us1-billion-investment-in-africa-accelerating-the-continents-digital-transformation": "news/google-surpasses-us1-billion-investment-in-africa-accelerating-the-continents-digital-transformation.webp",
+  "india-emerges-as-asias-top-equity-market-performer": "news/india-emerges-as-asias-top-equity-market-performer.webp",
+  "global-financial-firms-expand-across-asiawith-south-korea-emerging-as-a-key-investment-destination": "news/global-financial-firms-expand-across-asiawith-south-korea-emerging-as-a-key-investment-destination.webp",
+  "sovereign-wealth-fuels-energy-boom-across-asia-and-africa": "news/sovereign-wealth-fuels-energy-boom-across-asia-and-africa.webp",
+  "asias-ai-semiconductor-industry-gains-fresh-momentum-as-global-demand-accelerates": "news/asias-ai-semiconductor-industry-gains-fresh-momentum-as-global-demand-accelerates.webp",
+  "indias-exports-surge-18-in-may": "news/indias-exports-surge-18-in-may.webp",
+  "quad-nations-strengthen-critical-minerals-port-cooperation": "news/quad-nations-strengthen-critical-minerals-port-cooperation.webp",
+  "iran-conflict-drives-oil-price-surge-pressuring-african-fuel-markets": "news/iran-conflict-drives-oil-price-surge-pressuring-african-fuel-markets.webp",
+  "hong-kong-expands-funding-schemes-to-support-business-growth-and-innovation": "news/hong-kong-expands-funding-schemes-to-support-business-growth-and-innovation.webp",
+  "dangote-cement-posts-record-730m-profit-raises-dividend-expands-footprint": "news/dangote-cement-posts-record-730m-profit-raises-dividend-expands-footprint.webp",
+  "india-adopts-a-new-gdp-base-year-reshaping-macroeconomic-measurement": "news/india-adopts-a-new-gdp-base-year-reshaping-macroeconomic-measurement.webp",
+  "india-revises-its-tax-treaty-with-france-reshaping-dividend-and-capital-gains-rules": "news/india-revises-its-tax-treaty-with-france-reshaping-dividend-and-capital-gains-rules.webp",
+  "several-african-economies-are-set-to-record-the-steepest-food-price-increases-in-2026": "news/several-african-economies-are-set-to-record-the-steepest-food-price-increases-in-2026.webp",
+  "vietnams-2026-education-reforms-aim-to-boost-fdi-and-workforce-transformation": "news/vietnams-2026-education-reforms-aim-to-boost-fdi-and-workforce-transformation.webp",
+  "south-africas-debt-burden-is-set-to-peak-signalling-a-fiscal-turning-point": "news/south-africas-debt-burden-is-set-to-peak-signalling-a-fiscal-turning-point.webp",
+  "africa-business-forum-2026-calls-for-bold-risk-tolerant-investment-to-drive-jobs-and-innovation": "news/africa-business-forum-2026-calls-for-bold-risk-tolerant-investment-to-drive-jobs-and-innovation.webp",
+  "malaysia-tightens-focus-on-tax-treatment-of-intercompany-funding-and-royalties": "news/malaysia-tightens-focus-on-tax-treatment-of-intercompany-funding-and-royalties.webp",
+  "the-eu-advances-its-indo-pacific-trade-strategy-through-india-and-vietnam-partnerships": "news/the-eu-advances-its-indo-pacific-trade-strategy-through-india-and-vietnam-partnerships.webp",
+  "africas-largest-dam-is-turning-ethiopia-into-a-regional-power-hub": "news/africas-largest-dam-is-turning-ethiopia-into-a-regional-power-hub.webp",
+  "nris-continue-to-miss-dtaa-benefits-due-to-documentation-and-compliance-gaps": "news/nris-continue-to-miss-dtaa-benefits-due-to-documentation-and-compliance-gaps.webp",
+  "africas-business-travel-sees-renewed-momentum": "news/africas-business-travel-sees-renewed-momentum.webp",
+  "africas-data-centre-boom-reshapes-energy-and-digital-infrastructure-landscape": "news/africas-data-centre-boom-reshapes-energy-and-digital-infrastructure-landscape.webp"
+ }
+}
