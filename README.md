@@ -89,7 +89,7 @@ The scripts need Python 3.10+ and Pillow (`pip install pillow`). They only run w
 
 The membership, contact, careers and newsletter forms are set up for **Netlify Forms**. Netlify detects them in the exported HTML. Each form has a honeypot field, and posts to `/thanks/` when JavaScript is off.
 
-To use Formspree instead, build with `NEXT_PUBLIC_FORMS_PROVIDER=formspree:<form id>`.
+To use Formspree instead, build with `NEXT_PUBLIC_FORMS_PROVIDER=formspree:<form id>`. All four forms then post to that one Formspree form, each with its own subject line. The GitHub Pages deploy takes this from the repository variable `FORMS_PROVIDER`. The careers form sends a CV, and Formspree only accepts file uploads on its paid plans.
 
 On `localhost`, forms only show a preview message and send nothing.
 
@@ -99,7 +99,7 @@ The site is published to **GitHub Pages** at https://byte-barn.github.io/aacci-w
 
 - **Sub-path:** on GitHub Pages the site is served under `/aacci-website`, not at the root of a domain. The build reads the address from the repository's Pages settings and passes it in as `NEXT_PUBLIC_BASE_PATH` and `NEXT_PUBLIC_SITE_URL`. Adding a custom domain in those settings needs no code change.
 - **Writing paths:** `next/link` adds the sub-path by itself. Every image, plain `<a>`, `fetch` and form action must go through `asset()` from `src/lib/base.ts`, or it will break under the sub-path. Full addresses for metadata come from `abs()` in `src/lib/seo.ts`.
-- **Not available on GitHub Pages:** the redirects in `public/_redirects`, the headers in `public/_headers`, and Netlify Forms. Use Formspree for the forms (see above).
+- **Not available on GitHub Pages:** the redirects in `public/_redirects`, the headers in `public/_headers`, and Netlify Forms. The forms use Formspree here (see Forms above).
 
 To build locally the way the deploy does: `NEXT_PUBLIC_BASE_PATH=/aacci-website NEXT_PUBLIC_SITE_URL=https://byte-barn.github.io/aacci-website npm run build`.
 

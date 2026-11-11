@@ -47,6 +47,8 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+          # Repository variable, e.g. "formspree:abcdwxyz". Without it the forms cannot deliver on GitHub Pages.
+          NEXT_PUBLIC_FORMS_PROVIDER: ${{ vars.FORMS_PROVIDER }}
 
       # Netlify-only files; GitHub Pages ignores them.
       - run: rm -f out/_redirects out/_headers
