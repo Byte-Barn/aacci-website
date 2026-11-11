@@ -44,6 +44,11 @@ jobs:
       - run: npm run typecheck
       - run: npm run build
 
+      # The host ignores Netlify's _redirects and _headers; write the same
+      # rules, the 404 page and the deploy-list block as an .htaccess.
+      - name: Write .htaccess
+        run: python3 .github/scripts/build_htaccess.py out
+
       - name: Keep the built site for the deploy job
         if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
