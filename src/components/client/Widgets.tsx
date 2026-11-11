@@ -189,6 +189,8 @@ export function FeeFinder() {
   );
 }
 
+const DIRECTORY_STEP = 12;
+
 /** Advisory board directory with search and a country filter. Reads ?q= so search results can link straight to a person. */
 export function Directory({ members }: { members: Member[] }) {
   const search = useLocationSearch();
@@ -200,8 +202,12 @@ export function Directory({ members }: { members: Member[] }) {
     members.forEach((m) => { c[m.country] = (c[m.country] ?? 0) + 1; });
     return Object.entries(c).sort(([a], [b]) => a.localeCompare(b));
   }, [members]);
+  const [limit, setLimit] = useState(DIRECTORY_STEP);
   const term = q.trim().toLowerCase();
   const shown = members.filter((m) => (!country || m.country === country) && (!term || `${m.name} ${m.role.join(' ')} ${m.country}`.toLowerCase().includes(term)));
+  // Everyone stays in the HTML for crawlers; without a search the list opens a page at a time so phones aren't faced with 123 cards.
+  const filtering = Boolean(term || country);
+  const visible = new Set(filtering ? shown : shown.slice(0, limit));
 
   return (
     <div className="directory">
@@ -217,10 +223,15 @@ export function Directory({ members }: { members: Member[] }) {
       </div>
       <ul className="members">
         {members.map((m, i) => (
-          <MemberCard key={m.name + i} m={m} index={i} hidden={!shown.includes(m)} />
+          <MemberCard key={m.name + i} m={m} index={i} hidden={!visible.has(m)} />
         ))}
       </ul>
       {shown.length === 0 ? <p className="directory-empty">No advisers match that search. Try a shorter name or choose all countries.</p> : null}
+      {!filtering && shown.length > limit ? (
+        <div className="more-row">
+          <button type="button" className="btn btn--line" onClick={() => setLimit(limit + DIRECTORY_STEP)}><span>Show more advisers ({shown.length - limit} left)</span></button>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -271,10 +282,23 @@ export type { MapData };
 /** Policies page: the side menu follows the section you are reading. */
 export function PolicyNav({ items }: { items: { id: string; label: string }[] }) {
   const [cur, setCur] = useState(items[0].id);
+  // Work out the current section from the scroll position, so jumps (Home key, anchor links) are right too.
   useEffect(() => {
-    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) setCur(e.target.id); }), { rootMargin: '-30% 0px -60% 0px' });
-    items.forEach((i) => { const el = document.getElementById(i.id); if (el) io.observe(el); });
-    return () => io.disconnect();
+    const els = items.map((i) => document.getElementById(i.id)).filter((el): el is HTMLElement => Boolean(el));
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const line = window.innerHeight * 0.35;
+      const atEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+      let id = items[0].id;
+      for (const el of els) if (el.getBoundingClientRect().top <= line) id = el.id;
+      setCur(atEnd && els.length ? els[els.length - 1].id : id);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    raf = requestAnimationFrame(update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
   }, [items]);
   return (
     <nav className="policy-nav" aria-label="Policies">
