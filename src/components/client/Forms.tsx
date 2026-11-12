@@ -12,8 +12,10 @@ const SENT: Record<string, string> = {
 };
 const WHAT: Record<string, string> = { membership: 'membership application', contact: 'message', careers: 'job application', newsletter: 'subscription' };
 
-// FORMS_PROVIDER: "netlify" (default) or "formspree:<form id>". Set NEXT_PUBLIC_FORMS_PROVIDER at build time.
+// FORMS_PROVIDER: "netlify" (default), "formspree:<form id>" or "demo". Set NEXT_PUBLIC_FORMS_PROVIDER at build time.
 const PROVIDER = process.env.NEXT_PUBLIC_FORMS_PROVIDER || 'netlify';
+// Demo builds (the preview) label every form as a demo and send nothing.
+const DEMO = PROVIDER === 'demo';
 // With Formspree, every form posts to one endpoint; a subject line tells the four forms apart in the inbox.
 const FORMSPREE = PROVIDER.startsWith('formspree:') ? `https://formspree.io/f/${PROVIDER.split(':')[1]}` : '';
 // Hidden field that only bots fill in. Each provider looks for its own field name.
@@ -59,7 +61,7 @@ function showError(input: HTMLElement, text: string) {
 
 async function send(form: HTMLFormElement) {
   const local = location.protocol === 'file:' || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
-  if (local) return { ok: true, preview: true };
+  if (DEMO || local) return { ok: true, preview: true };
   const data = new FormData(form);
   if (FORMSPREE) {
     const r = await fetch(FORMSPREE, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
@@ -99,7 +101,7 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
     try { result = await send(form); } catch { result = { ok: false }; }
     setBusy(false);
     if (!result.ok) setState({ kind: 'error', text: 'Your form could not be sent. Try again, or email info@asianafrican.org.' });
-    else if (result.preview) setState({ kind: 'ok', text: `Preview: on the live site this sends your ${WHAT[name] ?? 'form'} to the AACCI secretariat.` });
+    else if (result.preview) { setState({ kind: 'ok', text: `${SENT[name] ?? 'Sent.'} This is a demo form, so nothing was sent.` }); form.reset(); }
     else { setState({ kind: 'ok', text: SENT[name] ?? 'Sent.' }); form.reset(); }
   };
 
@@ -110,7 +112,7 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
 
   return (
     <form ref={ref} className={className} name={name} method="POST" action={FORMSPREE || asset('/thanks/')} encType={multipart ? 'multipart/form-data' : undefined}
-      {...(FORMSPREE ? {} : { 'data-netlify': 'true', 'netlify-honeypot': HONEYPOT })} noValidate onSubmit={onSubmit} onChange={onFieldChange} onBlur={onFieldChange}>
+      {...(FORMSPREE || DEMO ? {} : { 'data-netlify': 'true', 'netlify-honeypot': HONEYPOT })} noValidate onSubmit={onSubmit} onChange={onFieldChange} onBlur={onFieldChange}>
       <input type="hidden" name="form-name" value={name} />
       {FORMSPREE ? (
         <>
@@ -121,6 +123,7 @@ export function SmartForm({ name, className = 'form', multipart = false, submitL
       ) : null}
       <p className="hp" aria-hidden="true"><label>Leave this empty <input name={HONEYPOT} tabIndex={-1} autoComplete="off" /></label></p>
       {children}
+      {DEMO ? <p className="form-demo"><span>Demo</span> Nothing you enter in this form is sent.</p> : null}
       {name !== 'newsletter' ? (
         <button className="btn btn--primary" type="submit" disabled={busy}><span>{busy ? 'Sending…' : submitLabel}</span></button>
       ) : null}

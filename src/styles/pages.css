@@ -394,6 +394,10 @@ details.more[open] > .prose, details.more[open] > ul { animation: rise .45s var(
 .form-msg { margin: 0; font-weight: 600; min-height: 1.5em; }
 .form-msg.is-ok { color: var(--palm); }
 .form-msg.is-error { color: var(--laterite); }
+.form-demo { margin: 0; display: flex; gap: 10px; align-items: baseline; font-size: .9375rem; color: var(--slate); }
+.form-demo span { flex: none; padding: 1px 8px; border: 1.5px solid var(--saffron-deep); color: var(--saffron-deep); font-size: .8125rem; font-weight: 700; }
+.subscribe .form-demo { margin-top: 10px; color: var(--on-ink-muted); }
+.subscribe .form-demo span { border-color: var(--saffron); color: var(--saffron); }
 .contact-lines { display: grid; gap: 6px; margin: 20px 0; }
 .contact-lines li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 12px; }
 .contact-lines a { overflow-wrap: anywhere; min-width: 0; }
